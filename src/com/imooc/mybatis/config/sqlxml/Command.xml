@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Command">
+
+  <resultMap type="com.imooc.mybatis.bean.Command" id="CommandResult">
+    <id column="C_ID" jdbcType="INTEGER" property="id"/>
+    <result column="NAME" jdbcType="VARCHAR" property="name"/>
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+    <collection property="contentList" resultMap="CommandContent.Content"/>
+  </resultMap>
+
+  <select id="queryCommandList" parameterType="com.imooc.mybatis.bean.Command" resultMap="CommandResult">
+    SELECT a.ID C_ID, a.NAME, a.DESCRIPTION, b.ID, b.CONTENT, b.COMMAND_ID 
+    FROM command a LEFT JOIN command_content b 
+    ON a.ID = b.COMMAND_ID   
+    <where>
+	    <if test="name!=null and !name.trim().equals(&quot;&quot;)">AND a.NAME=#{name}</if>
+	    <if test="description!=null and !description.trim().equals(&quot;&quot;)">AND a.DESCRIPTION like '%' #{description} '%'</if>
+ 	</where>
+  </select>
+  
+  <delete id="deleteOne" parameterType="int">
+  	DELETE FROM message WHERE id = #{_parameter}
+  </delete>
+  
+  <delete id="deleteBatch" parameterType="java.util.List">
+  	DELETE FROM message WHERE id in(
+  	<foreach collection="list" item="item" separator=",">
+  		#{item}  	
+  	</foreach>
+  	)
+  </delete>
+    
+</mapper>

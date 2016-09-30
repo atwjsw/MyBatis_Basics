@@ -48,8 +48,8 @@
 
   <mappers>
     <mapper resource="com/imooc/mybatis/config/sqlxml/Message.xml"/>
-    <mapper resource="com/imooc/mybatis/config/sqlxml/Command.xml"/>
-    <mapper resource="com/imooc/mybatis/config/sqlxml/CommandContent.xml"/>
+    <!-- <mapper resource="com/imooc/mybatis/config/sqlxml/Command.xml"/>
+    <mapper resource="com/imooc/mybatis/config/sqlxml/CommandContent.xml"/> -->
   </mappers>
 
 </configuration>

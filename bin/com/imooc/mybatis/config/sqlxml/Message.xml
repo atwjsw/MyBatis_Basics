@@ -4,7 +4,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Message">
+<mapper namespace="com.imooc.mybatis.dao.IMessage">
 
   <resultMap type="com.imooc.mybatis.bean.Message" id="MessageResult">
     <id column="ID" jdbcType="INTEGER" property="id"/>
@@ -13,11 +13,30 @@
     <result column="CONTENT" jdbcType="VARCHAR" property="content"/>
   </resultMap>
 
-  <select id="queryMessageList" parameterType="com.imooc.mybatis.bean.Message" resultMap="MessageResult">
+  <!-- <select id="queryMessageList" parameterType="com.imooc.mybatis.bean.Message" resultMap="MessageResult">
     SELECT ID, COMMAND, DESCRIPTION, CONTENT FROM message WHERE 1=1
     <if test="command!=null and !command.trim().equals(&quot;&quot;)">AND COMMAND=#{command}</if>
     <if test="description!=null and !description.trim().equals(&quot;&quot;)">AND DESCRIPTION like '%' #{description} '%'</if>
+  </select> -->
+  
+  <select id="queryMessageList" parameterType="java.util.Map" resultMap="MessageResult">
+    SELECT ID, COMMAND, DESCRIPTION, CONTENT FROM message
+    <where>
+    <if test="message.command!=null and !message.command.trim().equals(&quot;&quot;)">AND COMMAND=#{message.command}</if>
+    <if test="message.description!=null and !message.description.trim().equals(&quot;&quot;)">AND DESCRIPTION like '%' #{message.description} '%'</if>
+    </where>
+    ORDER BY ID limit #{page.dbIndex},#{page.dbNumber}
   </select>
+  
+  <select id="count" parameterType="com.imooc.mybatis.bean.Message" resultType="int">
+    SELECT COUNT(*) FROM message
+    <where>
+    <if test="command!=null and !command.trim().equals(&quot;&quot;)">AND COMMAND=#{command}</if>
+    <if test="description!=null and !description.trim().equals(&quot;&quot;)">AND DESCRIPTION like '%' #{description} '%'</if>
+    </where>
+  </select>
+  
+ 
   
   <delete id="deleteOne" parameterType="int">
   	DELETE FROM message WHERE id = #{_parameter}

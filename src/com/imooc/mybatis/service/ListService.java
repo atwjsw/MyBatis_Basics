@@ -1,7 +1,9 @@
 package com.imooc.mybatis.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.imooc.mybatis.bean.Command;
@@ -9,12 +11,30 @@ import com.imooc.mybatis.bean.CommandContent;
 import com.imooc.mybatis.bean.Message;
 import com.imooc.mybatis.dao.CommandDao;
 import com.imooc.mybatis.dao.ListDao;
+import com.imooc.mybatis.entity.Page;
 import com.imooc.mybatis.util.IConst;
 
 public class ListService {
 
 	public List<Message> getMessageList(String command, String description) {
 		return new ListDao().getMessageList(command, description);
+	}
+
+	public List<Message> queryMessageList(String command, String description, Page page) {
+		ListDao listDao = new ListDao();
+		Message message = new Message();
+		message.setCommand(command);
+		message.setDescription(description);
+		int totalNumber = listDao.getMessageCount(message);
+		page.setTotalNumber(totalNumber);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", message);
+		map.put("page", page);
+		List<Message> messageList = listDao.queryMessageList(map);
+		for (Message m : messageList) {
+			System.out.println(m.getId() + "   " + m.getCommand() + "    " + m.getDescription());
+		}
+		return messageList;
 	}
 
 	public void deleteOne(String id) {
@@ -34,7 +54,7 @@ public class ListService {
 	}
 
 	public String queryByCommand(String command) {
-		
+
 		CommandDao commandDao = new CommandDao();
 
 		List<Command> commandList;
@@ -53,7 +73,7 @@ public class ListService {
 
 		if (commandList != null && commandList.size() != 0) {
 			List<CommandContent> commandContentList = commandList.get(0).getContentList();
-			int i = new Random().nextInt(commandContentList.size());			
+			int i = new Random().nextInt(commandContentList.size());
 			return commandContentList.get(i).getContent();
 		} else {
 			return IConst.NO_MATCHING_CONTENT;

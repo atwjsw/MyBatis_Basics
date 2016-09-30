@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.imooc.mybatis.bean.Command;
 import com.imooc.mybatis.bean.CommandContent;
-import com.imooc.mybatis.bean.Message;
 import com.imooc.mybatis.db.DBAccess;
 
 public class CommandDao {
@@ -39,7 +38,7 @@ public class CommandDao {
 	public static void main(String[] args) {
 		CommandDao commandDao = new CommandDao();
 		List<Command> commandList = commandDao.queryCommandList("段子", "");
-		List<CommandContent> contentList = commandList.get(0).getContentList();
+		List<CommandContent> contentList = commandList.get(0).getContentList();		
 		for (CommandContent commandContent: contentList) {
 			System.out.println(commandContent.getContent());
 			System.out.println(commandContent.getId());

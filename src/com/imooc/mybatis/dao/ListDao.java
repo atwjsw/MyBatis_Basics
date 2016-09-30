@@ -6,12 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-
 import com.imooc.mybatis.bean.Message;
 import com.imooc.mybatis.db.DBAccess;
+import com.imooc.mybatis.entity.Page;
 
 public class ListDao {
 
@@ -59,10 +61,13 @@ public class ListDao {
 		message.setCommand(command);
 		message.setDescription(description);
 		DBAccess dbAccess = new DBAccess();
+		IMessage iMessage;
 		SqlSession sqlSession = null;
 		try {
 			sqlSession = dbAccess.getSqlSession();
-			messageList = sqlSession.selectList("Message.queryMessageList", message);
+			//messageList = sqlSession.selectList("Message.queryMessageList", message);
+			iMessage = sqlSession.getMapper(IMessage.class);
+			messageList = iMessage.queryMessageList(message);
 			System.out.println("sqlSession: " + sqlSession);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -73,6 +78,51 @@ public class ListDao {
 			}
 		}
 		return messageList;
+	}
+	
+	public List<Message> queryMessageList(Map<String,Object> parameter) {
+		
+		DBAccess dbAccess = new DBAccess();
+		List<Message> messageList = new ArrayList<Message>();
+		IMessage iMessage;
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			iMessage = sqlSession.getMapper(IMessage.class);						
+			messageList = iMessage.queryMessageList(parameter);
+			System.out.println("sqlSession: " + sqlSession);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return messageList;
+	}
+	
+	public int getMessageCount(Message message) {
+
+		DBAccess dbAccess = new DBAccess();
+		IMessage iMessage;
+		SqlSession sqlSession = null;
+		int count = 0;
+		try {
+			sqlSession = dbAccess.getSqlSession();
+			//messageList = sqlSession.selectList("Message.queryMessageList", message);
+			iMessage = sqlSession.getMapper(IMessage.class);
+			count = iMessage.count(message);
+			System.out.println("sqlSession: " + sqlSession);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		return count;
 	}
 
 	public List<Message> getMessageListByJDBC(String command, String description) {
@@ -117,12 +167,31 @@ public class ListDao {
 	}
 
 	public static void main(String[] args) {
-		ListDao listDao = new ListDao();
-		//listDao.getMessageList("", "");
-		List<Integer> idList = new ArrayList<Integer>();
+		
+//		List<Message> messageList = listDao.getMessageList("", "");
+//		for (Message message: messageList) {
+//			System.out.println(message.getId() + "   " + message.getCommand() + "    " + message.getDescription());
+//		}
+		
+		/*List<Integer> idList = new ArrayList<Integer>();
 		idList.add(10);
 		idList.add(11);
-		listDao.deleteBatch(idList);
+		listDao.deleteBatch(idList);*/
+		ListDao listDao = new ListDao();
+		Message message = new Message();
+		message.setCommand("");
+		message.setDescription("");
+		Page page = new Page();		
+		page.setCurrentPage(2);	
+		page.setTotalNumber(7);	
+		page.count();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", message);
+		map.put("page", page);
+		List<Message> messageList = listDao.queryMessageList(map);
+		for (Message m: messageList) {
+			System.out.println(m.getId() + "   " + m.getCommand() + "    " + m.getDescription());
+		}
 
 	}
 

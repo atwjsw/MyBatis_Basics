@@ -51,8 +51,23 @@ INSERT INTO command_content(COMMAND_ID, CONTENT) VALUES (12, '昨日，邓超在
 INSERT INTO command_content(COMMAND_ID, CONTENT) VALUES (13, '忍者神龟》[2]真人电影由美国派拉蒙影业发行，《洛杉矶之战》导演乔纳森·里贝斯曼执导。 \r\n片中四只神龟和老鼠老师都基于漫画和卡通重新绘制，由动作捕捉技术实现。\r\n其中皮特·普劳泽克饰演达芬奇(武器：武士刀)，诺尔·费舍饰演米开朗基罗(武器：双节棍)，阿伦·瑞奇森饰演拉斐尔(武器：铁叉)，杰瑞米·霍华德饰演多拉泰罗(武器：武士棍)。\r\n该片计划于2014年8月8日在北美上映。');
 INSERT INTO command_content(COMMAND_ID, CONTENT) VALUES (14, '查啥呀查，你不会中奖的');
 
-INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试1', '测试内容1', '测试内容测试测试测试1');
-INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试2', '测试内容2', '测试内容测试测试测试2');
-INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试3', '测试内容3', '测试内容测试测试测试3');
-INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试4', '测试内容4', '测试内容测试测试测试4');
-INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试5', '测试内容5', '测试内容测试测试测试5');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试21', '测试内容1', '测试内容测试测试测试1');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试22', '测试内容2', '测试内容测试测试测试2');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试23', '测试内容3', '测试内容测试测试测试3');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试24', '测试内容4', '测试内容测试测试测试4');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试25', '测试内容5', '测试内容测试测试测试5');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试31', '测试内容1', '测试内容测试测试测试1');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试32', '测试内容2', '测试内容测试测试测试2');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试33', '测试内容3', '测试内容测试测试测试3');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试34', '测试内容4', '测试内容测试测试测试4');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试35', '测试内容5', '测试内容测试测试测试5');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试41', '测试内容1', '测试内容测试测试测试1');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试42', '测试内容2', '测试内容测试测试测试2');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试43', '测试内容3', '测试内容测试测试测试3');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试44', '测试内容4', '测试内容测试测试测试4');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试45', '测试内容5', '测试内容测试测试测试5');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试51', '测试内容1', '测试内容测试测试测试1');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试52', '测试内容2', '测试内容测试测试测试2');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试53', '测试内容3', '测试内容测试测试测试3');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试54', '测试内容4', '测试内容测试测试测试4');
+INSERT INTO message(COMMAND, DESCRIPTION, CONTENT) VALUES ('测试555', '测试内容5', '测试内容测试测试测试5');
